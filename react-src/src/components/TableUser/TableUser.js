@@ -15,7 +15,7 @@ class TableUser extends Component {
         <Table.Cell>{user.name}</Table.Cell>
         <Table.Cell>{user.email}</Table.Cell>
         <Table.Cell>{user.age}</Table.Cell>
-        <Table.Cell>{user.gender}</Table.Cell>
+        <Table.Cell>{user.password}</Table.Cell>
         <Table.Cell>
           <ModalUser
             headerTitle='Edit User'
@@ -50,7 +50,7 @@ class TableUser extends Component {
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
             <Table.HeaderCell>Age</Table.HeaderCell>
-            <Table.HeaderCell>Gender</Table.HeaderCell>
+            <Table.HeaderCell>Password</Table.HeaderCell>
             <Table.HeaderCell>Actions</Table.HeaderCell>
           </Table.Row>
         </Table.Header>

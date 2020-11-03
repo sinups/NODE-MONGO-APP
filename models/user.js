@@ -26,7 +26,7 @@ const ageValidator = [
   // TODO: Make some validations here...
 ];
 
-const genderValidator = [
+const passValidator = [
   // TODO: Make some validations here...
 ];
 
@@ -47,9 +47,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     validate: ageValidator
   },
-  gender: {
+  password: {
     type: String,
-    validate: genderValidator
+    required: [true, 'Password is required.'],
+    validate: passValidator
   }
 });
 

@@ -51,7 +51,7 @@ router.post('/', postLimiter, (req, res) => {
     name: sanitizeName(req.body.name),
     email: sanitizeEmail(req.body.email),
     age: sanitizeAge(req.body.age),
-    gender: sanitizeGender(req.body.gender)
+    password: sanitizePassword(req.body.password)
   });
 
   newUser.save()
@@ -64,7 +64,7 @@ router.post('/', postLimiter, (req, res) => {
           name: result.name,
           email: result.email,
           age: result.age,
-          gender: result.gender
+          password: result.password
         }
       });
     })
@@ -82,8 +82,8 @@ router.post('/', postLimiter, (req, res) => {
           res.status(400).json({ success: false, msg: err.errors.age.message });
           return;
         }
-        if (err.errors.gender) {
-          res.status(400).json({ success: false, msg: err.errors.gender.message });
+        if (err.errors.password) {
+          res.status(400).json({ success: false, msg: err.errors.password.message });
           return;
         }
         // Show failed if all else fails for some reasons
@@ -104,7 +104,7 @@ router.put('/:id', (req, res) => {
     name: sanitizeName(req.body.name),
     email: sanitizeEmail(req.body.email),
     age: sanitizeAge(req.body.age),
-    gender: sanitizeGender(req.body.gender)
+    password: sanitizePassword(req.body.password)
   };
 
   User.findOneAndUpdate({ _id: req.params.id }, updatedUser, { runValidators: true, context: 'query' })
@@ -119,7 +119,7 @@ router.put('/:id', (req, res) => {
               name: newResult.name,
               email: newResult.email,
               age: newResult.age,
-              gender: newResult.gender
+              password: newResult.password
             }
           });
         })
@@ -142,8 +142,8 @@ router.put('/:id', (req, res) => {
           res.status(400).json({ success: false, msg: err.errors.age.message });
           return;
         }
-        if (err.errors.gender) {
-          res.status(400).json({ success: false, msg: err.errors.gender.message });
+        if (err.errors.password) {
+          res.status(400).json({ success: false, msg: err.errors.password.message });
           return;
         }
         // Show failed if all else fails for some reasons
@@ -165,7 +165,7 @@ router.delete('/:id', (req, res) => {
           name: result.name,
           email: result.email,
           age: result.age,
-          gender: result.gender
+          password: result.password
         }
       });
     })
@@ -188,7 +188,6 @@ sanitizeAge = (age) => {
   if (isNaN(age) && age != '') return '';
   return (age === '') ? age : parseInt(age);
 }
-sanitizeGender = (gender) => {
-  // Return empty if it's neither of the two
-  return (gender === 'm' || gender === 'f') ? gender : '';
+sanitizePassword = (password) => {
+  return password;
 }

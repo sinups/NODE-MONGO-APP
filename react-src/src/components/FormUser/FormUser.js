@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Message, Button, Form, Select } from 'semantic-ui-react';
 import axios from 'axios';
 
-const genderOptions = [
-  { key: 'm', text: 'Male', value: 'm' },
-  { key: 'f', text: 'Female', value: 'f' },
-  { key: 'o', text: 'Do Not Disclose', value: 'o' }
-]
 
 class FormUser extends Component {
 
@@ -17,7 +12,7 @@ class FormUser extends Component {
       name: '',
       email: '',
       age: '',
-      gender: '',
+      password: '',
       formClassName: '',
       formSuccessMessage: '',
       formErrorMessage: ''
@@ -37,7 +32,7 @@ class FormUser extends Component {
           name: response.data.name,
           email: response.data.email,
           age: (response.data.age === null) ? '' : response.data.age,
-          gender: response.data.gender,
+          password: response.data.password,
         });
       })
       .catch((err) => {
@@ -55,7 +50,7 @@ class FormUser extends Component {
   }
 
   handleSelectChange(e, data) {
-    this.setState({ gender: data.value });
+    this.setState({ password: data.value });
   }
 
   handleSubmit(e) {
@@ -66,7 +61,7 @@ class FormUser extends Component {
       name: this.state.name,
       email: this.state.email,
       age: this.state.age,
-      gender: this.state.gender
+      password: this.state.password
     }
 
     // Acknowledge that if the user id is provided, we're updating via PUT
@@ -91,7 +86,7 @@ class FormUser extends Component {
           name: '',
           email: '',
           age: '',
-          gender: ''
+          password: ''
         });
         this.props.onUserAdded(response.data.result);
         this.props.socket.emit('add', response.data.result);
@@ -141,7 +136,7 @@ class FormUser extends Component {
         <Form.Input
           label='Email'
           type='email'
-          placeholder='elonmusk@tesla.com'
+          placeholder='utm@utm.md'
           name='email'
           maxLength='40'
           required
@@ -159,13 +154,13 @@ class FormUser extends Component {
             value={this.state.age}
             onChange={this.handleInputChange}
           />
-          <Form.Field
-            control={Select}
-            label='Gender'
-            options={genderOptions}
-            placeholder='Gender'
-            value={this.state.gender}
-            onChange={this.handleSelectChange}
+          <Form.Input
+            label='Password'
+            placeholder='Password'
+            name="password"
+            type='password'
+            value={this.state.password}
+            onChange={this.handleInputChange}
           />
         </Form.Group>
         <Message
